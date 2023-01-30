@@ -1,0 +1,6 @@
+tests:
+  equalTo:
+    prompt_file: ./en/conversation.txt
+    prompt_append: prompt
+    assertions:
+      equalTo: "equalTo"

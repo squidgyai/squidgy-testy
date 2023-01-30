@@ -1,0 +1,6 @@
+openai
+pytest
+pytest-mock==3.8.2
+pydantic
+pydantic-yaml
+pyyaml
