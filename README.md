@@ -81,8 +81,7 @@ Now run all the tests again:
 ```
 Running tests...
 test_book_author:
-* book_author: 
-Test stop ['.']
+* book_author:
   * equalTo: ✓ (cached)
 ```
 
