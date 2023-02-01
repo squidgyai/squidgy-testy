@@ -23,11 +23,11 @@ class TestStore:
         else:
             self.data = {}
 
-    def get_cached_result(self, test_suite: str, test: str, prompt: str) -> str:
+    def get_cached_result(self, test_suite: str, test: str, prompt: str, stop: list[str]) -> str:
         """
         Returns true if the test should be run, false if it should be skipped.
         """
-        prompt_hash = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+        prompt_hash = hashlib.sha256((prompt + "\n".join(stop)).encode("utf-8")).hexdigest()
 
         if test_suite not in self.data:
             self.data[test_suite] = {}

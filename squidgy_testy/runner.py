@@ -78,7 +78,7 @@ class Runner:
                 prompt = generate_prompt(prompt_file, test.params, test.prompt_append)
 
                 # Nothing changed, let's not rerun
-                result = self.store.get_cached_result(test_suite_name, test_name, prompt)
+                result = self.store.get_cached_result(test_suite_name, test_name, prompt, stop)
                 is_cached = result is not None
                 if result is None:
                     result = self.service.invoke(prompt, stop=stop)

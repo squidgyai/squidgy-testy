@@ -11,10 +11,10 @@ class Recorder:
         print(f"{test_suite}:")
 
     def start_test(self, test_suite: str, test: str):
-        print(f"- {test}: ")
+        print(f"* {test}: ")
 
     def _assertion_start(self, assertion_type: str, success: bool, cached: bool):
-        print("  - %s: " % assertion_type, end="")
+        print("  * %s: " % assertion_type, end="")
         if success:
             print("✓ ", end="")
         else:
@@ -28,7 +28,7 @@ class Recorder:
 
         if not success:
             print()
-            print("    - Diff:")
+            print("    * Diff:")
             diff = difflib.ndiff(expected.splitlines(keepends=True), actual.splitlines(keepends=True))
             print('      ' + '      \n'.join(diff))
 
@@ -37,8 +37,8 @@ class Recorder:
         
         if not success:
             print()
-            print("    - Similarity: %f" % score)
-            print("    - Threshold: %f" % expected.threshold)
+            print("    * Similarity: %f" % score)
+            print("    * Threshold: %f" % expected.threshold)
 
             # create a character diff of the expected vs reply strings:
             print("    - Diff:")

@@ -3,6 +3,7 @@ from .runner import Runner, load_test_suites
 from .recorder import Recorder
 from .store import TestStore
 from .gpt3 import Gpt3PromptService
+import os
 
 # run tests when executed
 if __name__ == "__main__":
@@ -21,7 +22,7 @@ if __name__ == "__main__":
     runner = Runner(
         test_suites,
         Recorder(),
-        TestStore(".squidgy_testy/squidgy_testy.json"),
+        TestStore(os.path.join(args.directory, ".squidgy_testy/squidgy_testy.json")),
         Gpt3PromptService(),
         args.directory
     )
