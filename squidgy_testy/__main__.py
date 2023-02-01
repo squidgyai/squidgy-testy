@@ -21,7 +21,7 @@ if __name__ == "__main__":
     runner = Runner(
         test_suites,
         Recorder(),
-        TestStore("output/squidgy_testy.json"),
+        TestStore(".squidgy_testy/squidgy_testy.json"),
         Gpt3PromptService(),
         args.directory
     )

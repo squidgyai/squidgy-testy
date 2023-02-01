@@ -1,7 +1,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-output
+.squidgy_testy
 .vscode
 .env
-
+dist
+squidgy_testy.egg-info
