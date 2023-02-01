@@ -12,6 +12,15 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+  "openai",
+  "pytest",
+  "pytest-mock",
+  "pydantic",
+  "pydantic-yaml",
+  "pyyaml",
+  "numpy"
+]
 
 [project.urls]
 "Homepage" = "https://github.com/squidgyai/squidgy-testy"

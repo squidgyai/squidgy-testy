@@ -6,3 +6,4 @@ __pycache__/
 .env
 dist
 squidgy_testy.egg-info
+build
