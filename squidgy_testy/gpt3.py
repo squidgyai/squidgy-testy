@@ -27,3 +27,9 @@ class Gpt3PromptService(PromptService):
         )
 
         return response['choices'][0]['text'].strip()
+
+    def embed(
+        self, 
+        texts: list[str]
+    ) -> list[float]:
+        return openai.Embedding.create(input=texts, model="text-embedding-ada-002")

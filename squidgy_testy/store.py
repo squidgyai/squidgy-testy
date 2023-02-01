@@ -23,7 +23,7 @@ class TestStore:
         else:
             self.data = {}
 
-    def should_run(self, test_suite: str, test: str, prompt: str) -> bool:
+    def get_cached_result(self, test_suite: str, test: str, prompt: str) -> str:
         """
         Returns true if the test should be run, false if it should be skipped.
         """
@@ -37,19 +37,27 @@ class TestStore:
 
         test_data = self.data[test_suite][test]
 
-        if "hash" not in test_data:
-            test_data["hash"] = prompt_hash
-            test_data["last_run"] = datetime.now().isoformat()
-            self.save()
-            return True
+        if "hash" not in test_data or test_data["hash"] != prompt_hash:
+            return None
 
-        if test_data["hash"] != prompt_hash:
-            test_data["hash"] = prompt_hash
-            test_data["last_run"] = datetime.now().isoformat()
-            self.save()
-            return True
+        return test_data['result']
 
-        return False
+    def set_result(self, test_suite: str, test: str, prompt: str, result: str):
+        """
+        Sets the result of a test.
+        """
+        if test_suite not in self.data:
+            self.data[test_suite] = {}
+
+        if test not in self.data[test_suite]:
+            self.data[test_suite][test] = {}
+
+        test_data = self.data[test_suite][test]
+
+        test_data["hash"] = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+        test_data["result"] = result
+        test_data["last_run"] = datetime.now().isoformat()
+        self.save()
 
     def save(self):
         with open(self.file_name, "w") as f:
@@ -57,5 +65,8 @@ class TestStore:
 
 """A mock version of the TestStore which always returns true"""
 class MockTestStore:
-    def should_run(self, test_suite: str, test: str, prompt: str) -> bool:
-        return True
+    def set_result(self, test_suite: str, test: str, prompt: str, result: str):
+        pass
+
+    def get_cached_result(self, test_suite: str, test: str, prompt: str) -> str:
+        return None

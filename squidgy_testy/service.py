@@ -24,3 +24,9 @@ class PromptService:
         settings: dict[str, object] = {}
     ) -> str:
         pass
+
+    def embed(
+        self, 
+        texts: list[str]
+    ) -> list[float]:
+        pass
