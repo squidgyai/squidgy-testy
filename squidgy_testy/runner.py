@@ -71,6 +71,8 @@ class Runner:
                 stop = ['\n\n']
                 if test.stop is not None:
                     stop = test.stop
+                elif test_suite.stop is not None:
+                    stop = test_suite.stop
 
                 # combine prompt directory with the prompt file
                 prompt_file = os.path.join(self.prompt_directory, test.prompt_file)

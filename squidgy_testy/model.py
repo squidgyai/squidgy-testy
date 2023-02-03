@@ -19,4 +19,5 @@ class Test(BaseModel):
     assertions: Assertions
 
 class TestSuite(YamlModel):
+    stop: Optional[list[str]]
     tests: dict[str, Test]

@@ -10,9 +10,10 @@ def generate_prompt(
         if additional_text is not None:
             prompt += additional_text
 
-        for param in params:
-            if params[param] is not None:
-                prompt = prompt.replace("{%s}" % param, params[param])
+        if params:
+            for param in params:
+                if params[param] is not None:
+                    prompt = prompt.replace("{%s}" % param, params[param])
         return prompt
         
 class PromptService:
