@@ -85,7 +85,7 @@ class Runner:
                 if result is None:
                     result = self.service.invoke(prompt, stop=stop)
                     result = result.strip()
-                    self.store.set_result(test_suite_name, test_name, prompt, result)
+                    self.store.set_result(test_suite_name, test_name, prompt, stop, result)
 
                 test_success = True
 

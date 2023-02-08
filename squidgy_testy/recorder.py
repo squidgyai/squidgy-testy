@@ -30,7 +30,9 @@ class Recorder:
             print()
             print("    * Diff:")
             diff = difflib.ndiff(expected.splitlines(keepends=True), actual.splitlines(keepends=True))
-            print('      ' + '      \n'.join(diff))
+            print('      -----')
+            print('\n'.join(diff))
+            print('      -----')
 
     def similar_to_assertion(self, test_suite: str, test: str, assertion_type: str, success: bool, expected: SimilarToAssertion, actual: str, score: float, cached: bool):
         self._assertion_start(assertion_type, success, cached)
@@ -41,9 +43,11 @@ class Recorder:
             print("    * Threshold: %f" % expected.threshold)
 
             # create a character diff of the expected vs reply strings:
-            print("    - Diff:")
+            print("    * Diff:")
             diff = difflib.ndiff(expected.value.splitlines(keepends=True), actual.splitlines(keepends=True))
-            print('      ' + '      '.join(diff))
+            print('      -----')
+            print('\n'.join(diff))
+            print('      -----')
 
 
     def end_test(self, test_suite: str, test: str, success: bool, cached: bool):

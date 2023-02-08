@@ -42,7 +42,7 @@ class TestStore:
 
         return test_data['result']
 
-    def set_result(self, test_suite: str, test: str, prompt: str, result: str):
+    def set_result(self, test_suite: str, test: str, prompt: str, stop: list[str], result: str):
         """
         Sets the result of a test.
         """
@@ -54,7 +54,7 @@ class TestStore:
 
         test_data = self.data[test_suite][test]
 
-        test_data["hash"] = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+        test_data["hash"] = hashlib.sha256((prompt + "\n".join(stop)).encode("utf-8")).hexdigest()
         test_data["result"] = result
         test_data["last_run"] = datetime.now().isoformat()
         self.save()
