@@ -7,11 +7,11 @@ def test_store():
 
     store = TestStore(".squidgy_testy/test_store.json")
 
-    assert store.get_cached_result("test_suite", "test_name", "v1") is None
+    assert store.get_cached_result("test_suite", "test_name", "v1", ['stop']) is None
 
-    store.set_result("test_suite", "test_name", "v1", "result1")
-    assert store.get_cached_result("test_suite", "test_name", "v1") == "result1"
-    assert store.get_cached_result("test_suite", "test_name", "v2") is None
+    store.set_result("test_suite", "test_name", "v1", ['stop'], "result1")
+    assert store.get_cached_result("test_suite", "test_name", "v1", ['stop']) == "result1"
+    assert store.get_cached_result("test_suite", "test_name", "v2", ['stop']) is None
     
-    store.set_result("test_suite", "test_name", "v2", "result2")
-    assert store.get_cached_result("test_suite", "test_name", "v2") == "result2"
+    store.set_result("test_suite", "test_name", "v2", ['stop'], "result2")
+    assert store.get_cached_result("test_suite", "test_name", "v2", ['stop']) == "result2"

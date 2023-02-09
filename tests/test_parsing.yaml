@@ -3,4 +3,8 @@ tests:
     prompt_file: ./en/conversation.txt
     prompt_append: prompt
     assertions:
-      equalTo: "equalTo"
+      - equalTo: "equalTo"
+      - similarTo: 
+          value: similarTo
+          threshold: 0.9
+      - startsWith: startsWith

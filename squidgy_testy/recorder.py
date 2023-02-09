@@ -23,7 +23,7 @@ class Recorder:
         if cached:
             print("(cached)", end="")
 
-    def equal_to_assertion(self, test_suite: str, test: str, assertion_type: str, success: bool, expected: str, actual: str, cached: bool):
+    def text_comparison_assertion(self, test_suite: str, test: str, assertion_type: str, success: bool, expected: str, actual: str, cached: bool):
         self._assertion_start(assertion_type, success, cached)
 
         if not success:

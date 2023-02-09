@@ -65,8 +65,8 @@ class TestStore:
 
 """A mock version of the TestStore which always returns true"""
 class MockTestStore:
-    def set_result(self, test_suite: str, test: str, prompt: str, result: str):
+    def set_result(self, test_suite: str, test: str, prompt: str, stop: list[str], result: str):
         pass
 
-    def get_cached_result(self, test_suite: str, test: str, prompt: str) -> str:
+    def get_cached_result(self, test_suite: str, test: str, prompt: str, stop: list[str]) -> str:
         return None

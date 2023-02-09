@@ -52,7 +52,7 @@ tests:
       book_title: Twenty Thousand Leagues Under the Sea
     stop: ['.']
     assertions:
-      equalTo: Jules Verne
+      - equalTo: Jules Verne
 ```
 
 To run all the tests:
@@ -100,7 +100,7 @@ tests:
       title: Twenty Thousand Leagues Under the Sea
     stop: ['.']
     assertions:
-      equalTo: 1828
+      - equalTo: 1828
 ```
 
 ## Similar To
@@ -113,7 +113,7 @@ tests:
     params:
       title: Twenty Thousand Leagues Under the Sea
     assertions:
-      similarTo: 
+    - similarTo: 
         value: Julesy Verney
         threshold: 0.8
 ```

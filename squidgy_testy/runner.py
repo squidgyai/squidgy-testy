@@ -6,12 +6,15 @@ from .recorder import Recorder
 from .store import TestStore
 from .assertions import *
 
-def load_test_suites(directory: str, test_suite_to_run: str, test_name_to_run: str = None) -> dict[str,TestSuite]:
+def load_test_suites(directory: str, test_suite_to_run: str = None, test_name_to_run: str = None) -> dict[str,TestSuite]:
     if directory is None:
         directory = "."
 
     suites: dict[str, TestSuite] = {}
 
+    # get current working directory
+    directory = os.path.abspath(directory)
+    print(directory)
     # lists all yaml files in the tests directory and parses them into Python objects
     for root, dirs, files in os.walk(directory + "/tests"):
         for file in files:
@@ -89,18 +92,27 @@ class Runner:
 
                 test_success = True
 
-                if test.assertions.equalTo is not None:
-                    expected = test.assertions.equalTo
-                    assertion_success = equalTo(result, expected)
-                    test_success = test_success and assertion_success
+                for assertion in test.assertions:
+                    if type(assertion) == EqualToAssertion:
+                        expected = assertion.equalTo
+                        assertion_success = equalTo(result, expected)
+                        test_success = test_success and assertion_success
 
-                    self.recorder.equal_to_assertion(test_suite_name, test_name, "equalTo", assertion_success, test.assertions.equalTo, result, is_cached)
-                
-                if test.assertions.similarTo is not None:
-                    expected = test.assertions.similarTo
-                    assertion_success, score = similarTo(self.service, result, expected)
-                    test_success = test_success and assertion_success
+                        self.recorder.text_comparison_assertion(test_suite_name, test_name, "equalTo", assertion_success, assertion.equalTo, result, is_cached)
+                    
+                    if type(assertion) == SimilarToAssertion:
+                        expected = assertion.similarTo
+                        assertion_success, score = similarTo(self.service, result, expected)
+                        test_success = test_success and assertion_success
 
-                    self.recorder.similar_to_assertion(test_suite_name, test_name, "similarTo", assertion_success, test.assertions.similarTo, result, score, is_cached)
+                        self.recorder.similar_to_assertion(test_suite_name, test_name, "similarTo", assertion_success, assertion.similarTo, result, score, is_cached)
+
+                    if type(assertion) == StartsWithAssertion:
+                        expected = assertion.startsWith
+                        assertion_success, score = startsWith(self.service, result, expected)
+                        test_success = test_success and assertion_success
+
+                        self.recorder.text_comparison_assertion(test_suite_name, test_name, "startsWith", assertion_success, assertion.similarTo, result, is_cached)
+
 
                 self.recorder.end_test(test_suite_name, test_name, test_success, is_cached)

@@ -13,9 +13,9 @@ def test_load_test_suites(mocker: MockerFixture):
                 prompt="prompt",
                 params={},
                 stop=[],
-                assertions=Assertions(
+                assertions=[EqualToAssertion(
                     equalTo="equalTo",
-                )
+                )]
             )
         }
     )

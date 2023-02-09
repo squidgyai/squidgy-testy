@@ -5,7 +5,7 @@ tests:
       book_title: Twenty Thousand Leagues Under the Sea
     stop: ['.']
     assertions:
-      equalTo: Jules Verne
+      - equalTo: Jules Verne
 
   book_author_year:
     prompt_file: ./book_author.txt
@@ -14,13 +14,13 @@ tests:
       title: Twenty Thousand Leagues Under the Sea
     stop: ['.']
     assertions:
-      equalTo: 1828
+      - equalTo: 1828
 
   book_author_similarity:
     prompt_file: ./book_author.txt
     params:
       book_title: Twenty Thousand Leagues Under the Sea
     assertions:
-      similarTo: 
-        value: Julesy Verney
-        threshold: 0.85
+      - similarTo: 
+         value: Julesy Verney
+         threshold: 0.85

@@ -1,4 +1,4 @@
-from .model import SimilarToAssertion
+from .model import SimilarToAssertionData
 from .service import PromptService
 from numpy import dot
 from numpy.linalg import norm
@@ -9,7 +9,10 @@ def cos_sim(a, b):
 def equalTo(result: str, expected: str):
     return result == expected
 
-def similarTo(service: PromptService, result: str, similarTo: SimilarToAssertion) -> tuple[bool, float]:
+def startsWith(result: str, expected: str):
+    return result.startswith(expected)
+
+def similarTo(service: PromptService, result: str, similarTo: SimilarToAssertionData) -> tuple[bool, float]:
     response = service.embed([similarTo.value, result])
 
     embeddings = [d['embedding'] for d in response['data']]
